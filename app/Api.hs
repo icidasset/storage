@@ -10,7 +10,7 @@ import qualified Maps.Handlers as Maps
 {-| The API.
 
     !!! The order of the routes must match the order of the handlers
-        (see `server` below, will get a compiler error if it doesn't match)
+        (see `server` below, you will get a compiler error if it doesn't match)
 -}
 type Api
 
