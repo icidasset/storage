@@ -28,4 +28,4 @@ index =
 
 show :: Int -> Handler Map
 show _ =
-    return Map { id = 1, fields = [] }
+    return Map { id = 1, name = "Some map", fields = "" }

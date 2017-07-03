@@ -7,6 +7,7 @@ default-extensions:
    DisambiguateRecordFields
    DuplicateRecordFields
    FlexibleInstances
+   NoImplicitPrelude
    OverloadedStrings
    StandaloneDeriving
    TypeOperators
@@ -15,9 +16,16 @@ default-extensions:
 dependencies:
   - aeson == 1.*
   - base >= 4.9
+  - dotenv == 0.3.*
+  - envy == 1.3.*
   - flow
+  - protolude == 0.1.*
+  - selda == 0.1.*
+  - selda-postgresql == 0.1.*
   - servant-docs == 0.10.*
   - servant-server == 0.11.*
+  - text == 1.2.*
+  - wai-cli == 0.1.*
   - warp == 3.*
 
 

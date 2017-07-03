@@ -1,6 +1,7 @@
 module Api where
 
 import Maps.Types
+import Protolude (Int)
 import Servant
 import Servant.Docs
 

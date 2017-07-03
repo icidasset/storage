@@ -1,7 +1,10 @@
 module Main where
 
 import Api
-import Network.Wai.Handler.Warp (run)
+import Database
+import Environment
+import Network.Wai.Cli
+import Protolude
 import Servant
 
 
@@ -9,8 +12,14 @@ import Servant
 
 
 main :: IO ()
-main =
-    run 8000 application
+main = do
+    env <- appEnvironment
+
+    case env of
+        Dev -> loadDotEnvFile
+        _   -> return ()
+
+    defWaiMain application
 
 
 application :: Application

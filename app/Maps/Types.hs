@@ -1,7 +1,9 @@
 module Maps.Types where
 
 import Data.Aeson (FromJSON, ToJSON)
+import Data.Text (Text)
 import GHC.Generics
+import Protolude hiding (Map)
 import Servant.Docs
 
 
@@ -11,7 +13,8 @@ import Servant.Docs
 data Map =
     Map
         { id :: Int
-        , fields :: [Field]
+        , fields :: Text
+        , name :: Text
         }
 
 
@@ -22,28 +25,4 @@ instance FromJSON Map
 instance ToJSON Map
 
 instance ToSample Map where
-    toSamples _ =
-        [ ( "Initial", Map { id = 1, fields = [] } )
-        ]
-
-
-
--- Fields
-
-
-type Field =
-    ( String        -- Name
-    , FieldType     -- Type
-    )
-
-
-data FieldType
-    = String
-    | Number
-
-
-deriving instance Generic FieldType
-deriving instance Show FieldType
-
-instance FromJSON FieldType
-instance ToJSON FieldType
+    toSamples _ = []
