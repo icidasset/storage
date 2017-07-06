@@ -12,9 +12,8 @@ Experimental API written in Haskell.
 ### How to use
 
 ```shell
-# create postgresql db and run migrations
-createdb "my_db"
-"PG_DATABASE=my_db" > .env
+# create db and run migrations
+make cli -- db:create
 make cli -- db:migrate
 
 # generate api docs

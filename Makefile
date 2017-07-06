@@ -12,6 +12,7 @@ docs:
 	@stack build --exec docs
 
 cli:
+	@echo "🛠  Command-line"
 	@stack build && stack exec cli $(filter-out $@,$(MAKECMDGOALS))
 
 %:

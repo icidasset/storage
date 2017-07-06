@@ -2,6 +2,7 @@ module Maps.Queries where
 
 import Database
 import Database.Selda
+import Database.Selda.Unsafe
 import Maps.Types
 import Protolude hiding (Map)
 
@@ -17,6 +18,6 @@ byId theId = do
     map <- select Maps.table
 
     let id :*: _ = selectors Maps.table
-    restrict (map ! id .== literal theId)
+    restrict (map ! id .== literal (unsafeRowId theId))
 
     return map

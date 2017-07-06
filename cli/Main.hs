@@ -1,9 +1,14 @@
 module Main where
 
+import Flow
 import Prelude (unlines)
 import Protolude
-import System.Environment (getArgs)
+import System.Environment (getArgs, lookupEnv)
+import System.Process (callCommand)
 
+import qualified Data.Maybe as Maybe
+import qualified Data.Text as Text
+import qualified Database
 import qualified Environment
 import qualified Migrations
 
@@ -22,11 +27,26 @@ main = do
     case operation of
         "help" ->
             putStr $ unlines
-                [ "Commands:\n"
-                , "help"
+                [ "Commands:"
+                , ""
+                , "db:create"
+                , "db:drop"
                 , "db:migrate"
                 , "db:rollback"
+                , "help"
                 ]
+
+        "db:create" -> do
+            maybeDbName <- lookupEnv "PG_DATABASE"
+
+            -- TODO: Needs improvement
+            callCommand ("createdb " <> Maybe.fromJust maybeDbName)
+
+        "db:drop" -> do
+            maybeDbName <- lookupEnv "PG_DATABASE"
+
+            -- TODO: Needs improvement
+            callCommand ("dropdb " <> Maybe.fromJust maybeDbName)
 
         "db:migrate" ->
             Migrations.up

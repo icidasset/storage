@@ -1,12 +1,13 @@
 module Database where
 
+import Data.Aeson (FromJSON, ToJSON, parseJSON, toJSON)
 import Database.Selda as Selda
+import Database.Selda.Backend
 import Database.Selda.Generic as Selda
 import Database.Selda.PostgreSQL
 import Flow
 import GHC.Generics
-import Maps.Types (Map)
-import Protolude hiding (Map)
+import Protolude
 import Servant (Handler)
 import System.Envy as Envy
 
@@ -17,6 +18,15 @@ import System.Envy as Envy
 {-| Type alias for a Query with a Relation.
 -}
 type RelationalQuery s a = Query s (Cols s (Relation a))
+
+
+{-| Implement JSON for RowID
+-}
+instance FromJSON RowID where
+    parseJSON _ = return invalidRowId
+
+instance ToJSON RowID where
+    toJSON rowId = toJSON (fromRowId rowId)
 
 
 
@@ -37,6 +47,18 @@ one theQuery =
     theQuery
         |> Database.all
         |> fmap headMay
+
+
+
+-- Raw queries
+
+
+rawQuery :: Text -> IO ()
+rawQuery theQuery = connect $ do
+    backend     <- seldaBackend
+    _           <- liftIO (runStmt backend theQuery [])
+
+    return ()
 
 
 

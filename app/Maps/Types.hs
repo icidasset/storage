@@ -1,7 +1,8 @@
 module Maps.Types where
 
 import Data.Aeson (FromJSON, ToJSON)
-import Data.Text (Text)
+import Database
+import Database.Selda (RowID)
 import GHC.Generics
 import Protolude hiding (Map)
 import Servant.Docs
@@ -12,9 +13,9 @@ import Servant.Docs
 
 data Map =
     Map
-        { id :: Int
-        , fields :: Text
+        { id :: RowID
         , name :: Text
+        , fields :: Text
         }
 
 
@@ -23,6 +24,11 @@ deriving instance Show Map
 
 instance FromJSON Map
 instance ToJSON Map
+
+
+
+-- Documentation
+
 
 instance ToSample Map where
     toSamples _ = []

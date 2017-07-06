@@ -1,6 +1,7 @@
 module Maps.Handlers where
 
 import Database.Selda as Selda
+import Database.Selda.Generic as Selda (toRel)
 import Flow
 import Maps.Types
 import Protolude hiding (Map)
@@ -16,8 +17,13 @@ import qualified Maps.Table
 
 create :: Map -> Handler (Maybe Map)
 create map = Database.connectAndLift $ do
-    id <- Selda.insert Maps.Table.table [ def :*: name map :*: fields map ]
-    Database.one (Maps.Queries.byId id)
+    let (_ :*: rels) = toRel map
+
+    -- Create
+    id <- Selda.insertWithPK Maps.Table.table [ def :*: rels ]
+
+    -- Return map with id
+    Database.one (Maps.Queries.byId $ fromRowId id)
 
 
 
