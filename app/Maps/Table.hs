@@ -1,4 +1,4 @@
-module Maps.Db where
+module Maps.Table where
 
 import Database.Selda as Selda
 import Database.Selda.Generic as Selda

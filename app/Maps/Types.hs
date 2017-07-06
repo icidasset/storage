@@ -7,7 +7,7 @@ import Protolude hiding (Map)
 import Servant.Docs
 
 
--- Data
+-- 🗺
 
 
 data Map =

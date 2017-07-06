@@ -2,15 +2,18 @@ name: storage
 
 
 default-extensions:
-   DataKinds
-   DeriveGeneric
-   DisambiguateRecordFields
-   DuplicateRecordFields
-   FlexibleInstances
-   NoImplicitPrelude
-   OverloadedStrings
-   StandaloneDeriving
-   TypeOperators
+  AllowAmbiguousTypes
+  DataKinds
+  DeriveGeneric
+  DisambiguateRecordFields
+  DuplicateRecordFields
+  FlexibleContexts
+  FlexibleInstances
+  NoImplicitPrelude
+  OverloadedStrings
+  StandaloneDeriving
+  TypeFamilies
+  TypeOperators
 
 
 dependencies:
@@ -32,7 +35,7 @@ dependencies:
 executables:
   # 🚜
   server:
-    main: App.hs
+    main: Boot.hs
     source-dirs:
       - app
       - lib
@@ -42,4 +45,12 @@ executables:
     main: Docs.hs
     source-dirs:
       - app
+      - lib
+
+  # ⚗️
+  cli:
+    main: Main.hs
+    source-dirs:
+      - app
+      - cli
       - lib

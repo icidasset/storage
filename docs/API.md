@@ -29,24 +29,6 @@ Clients must supply the following data
 []
 ```
 
-- Initial
-
-```javascript
-[{"id":1,"fields":[]}]
-```
-
-- Initial
-
-```javascript
-[{"id":1,"fields":[]}]
-```
-
-- Initial, Initial
-
-```javascript
-[{"id":1,"fields":[]},{"id":1,"fields":[]}]
-```
-
 ## POST /maps
 
 #### Authentication
@@ -63,18 +45,6 @@ Clients must supply the following data
     - `application/json;charset=utf-8`
     - `application/json`
 
-- Example (Initial): `application/json;charset=utf-8`
-
-```javascript
-{"id":1,"fields":[]}
-```
-
-- Example (Initial): `application/json`
-
-```javascript
-{"id":1,"fields":[]}
-```
-
 #### Response:
 
 - Status code 200
@@ -85,17 +55,7 @@ Clients must supply the following data
     - `application/json;charset=utf-8`
     - `application/json`
 
-- Initial
-
-```javascript
-{"id":1,"fields":[]}
-```
-
-- Initial
-
-```javascript
-{"id":1,"fields":[]}
-```
+- No response body
 
 ## GET /maps/:map_id
 
@@ -120,15 +80,5 @@ Clients must supply the following data
     - `application/json;charset=utf-8`
     - `application/json`
 
-- Initial
-
-```javascript
-{"id":1,"fields":[]}
-```
-
-- Initial
-
-```javascript
-{"id":1,"fields":[]}
-```
+- No response body
 

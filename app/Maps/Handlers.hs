@@ -1,16 +1,23 @@
 module Maps.Handlers where
 
+import Database.Selda as Selda
+import Flow
 import Maps.Types
-import Prelude hiding (id)
+import Protolude hiding (Map)
 import Servant (Handler)
+
+import qualified Database
+import qualified Maps.Queries
+import qualified Maps.Table
 
 
 -- Create
 
 
-create :: Map -> Handler Map
-create map =
-    return map { id = 1 }
+create :: Map -> Handler (Maybe Map)
+create map = Database.connectAndLift $ do
+    id <- Selda.insert Maps.Table.table [ def :*: name map :*: fields map ]
+    Database.one (Maps.Queries.byId id)
 
 
 
@@ -19,13 +26,18 @@ create map =
 
 index :: Handler [Map]
 index =
-    return []
+    Maps.Queries.all
+        |> Database.all
+        |> Database.connectAndLift
 
 
 
 -- Show
 
 
-show :: Int -> Handler Map
-show _ =
-    return Map { id = 1, name = "Some map", fields = "" }
+show :: Int -> Handler (Maybe Map)
+show id =
+    id
+        |> Maps.Queries.byId
+        |> Database.one
+        |> Database.connectAndLift

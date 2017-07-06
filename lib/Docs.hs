@@ -7,10 +7,20 @@ import qualified Api
 import qualified Data.Text as Text (pack)
 
 
-api :: Docs.API
-api = docs Api.proxy
+{-| Generate documentation.
 
+    Table:
+    - API docs
 
+-}
 main :: IO ()
 main =
     writeFile "docs/API.md" (Text.pack $ Docs.markdown api)
+
+
+
+-- Modules
+
+
+api :: Docs.API
+api = docs Api.proxy

@@ -1,10 +1,18 @@
-.PHONY: docs
+.PHONY: cli docs
 
 
-all:
+all: server
+
+server:
 	@echo "🚜  Booting up server"
-	@stack build && stack exec server
+	@stack build --exec server
 
 docs:
 	@echo "📖  Generating documentation"
-	@stack build && stack exec docs
+	@stack build --exec docs
+
+cli:
+	@stack build && stack exec cli $(filter-out $@,$(MAKECMDGOALS))
+
+%:
+	@:

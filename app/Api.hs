@@ -1,7 +1,7 @@
 module Api where
 
 import Maps.Types
-import Protolude (Int)
+import Protolude (Int, Maybe)
 import Servant
 import Servant.Docs
 
@@ -23,10 +23,10 @@ type Api
     = "maps" :> Get '[JSON] [Map]
 
     -- GET /maps/:map_id
-    :<|> "maps" :> Capture "map_id" Int :> Get '[JSON] Map
+    :<|> "maps" :> Capture "map_id" Int :> Get '[JSON] (Maybe Map)
 
     -- POST /maps
-    :<|> "maps" :> ReqBody '[JSON] Map :> Post '[JSON] Map
+    :<|> "maps" :> ReqBody '[JSON] Map :> Post '[JSON] (Maybe Map)
 
 
 
