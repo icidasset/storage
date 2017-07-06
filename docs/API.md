@@ -55,7 +55,17 @@ Clients must supply the following data
     - `application/json;charset=utf-8`
     - `application/json`
 
-- No response body
+- 
+
+```javascript
+null
+```
+
+- 
+
+```javascript
+null
+```
 
 ## GET /maps/:map_id
 
@@ -80,5 +90,15 @@ Clients must supply the following data
     - `application/json;charset=utf-8`
     - `application/json`
 
-- No response body
+- 
+
+```javascript
+null
+```
+
+- 
+
+```javascript
+null
+```
 
