@@ -33,3 +33,4 @@ make server
 ### To do
 
 - Add timestamps to created records
+- Add tests
