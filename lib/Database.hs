@@ -5,9 +5,10 @@ import Database.Selda as Selda
 import Database.Selda.Backend
 import Database.Selda.Generic as Selda
 import Database.Selda.PostgreSQL
+import Database.Selda.Unsafe
 import Flow
-import GHC.Generics
-import Protolude
+import GHC.Generics hiding ((:*:))
+import Protolude hiding ((:*:))
 import Servant (Handler)
 import System.Envy as Envy
 
@@ -30,11 +31,9 @@ instance ToJSON RowID where
 
 
 
--- Querying
+-- Execute Queries
 
 
-{-| Execute a query that uses `Relation`s (ie. generics).
--}
 all :: (Res a ~ Relation r, Relational r, Result a) => Query s a -> SeldaM [r]
 all theQuery =
     theQuery
@@ -50,7 +49,33 @@ one theQuery =
 
 
 
--- Raw queries
+-- Mutations
+
+
+insert table item =
+    let
+        (_ :*: rels) = toRel item
+    in
+    Selda.insertWithPK table [ def :*: rels ]
+
+
+
+-- Building Queries
+
+
+byId table theId = do
+    item <- select table
+
+    let id :*: _    = selectors table
+    let rowID       = unsafeRowId theId
+
+    restrict (item ! id .== literal rowID)
+
+    return item
+
+
+
+-- Raw Queries
 
 
 rawQuery :: Text -> IO ()

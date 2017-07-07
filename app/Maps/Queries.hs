@@ -14,10 +14,4 @@ all = select Maps.table
 
 
 byId :: Int -> RelationalQuery x Map
-byId theId = do
-    map <- select Maps.table
-
-    let id :*: _ = selectors Maps.table
-    restrict (map ! id .== literal (unsafeRowId theId))
-
-    return map
+byId = Database.byId Maps.table
