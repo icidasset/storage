@@ -29,6 +29,24 @@ Clients must supply the following data
 []
 ```
 
+- 
+
+```javascript
+[{"name":"Sample","id":1,"fields":"a,b,c"}]
+```
+
+- 
+
+```javascript
+[{"name":"Sample","id":1,"fields":"a,b,c"}]
+```
+
+- 
+
+```javascript
+[{"name":"Sample","id":1,"fields":"a,b,c"},{"name":"Sample","id":1,"fields":"a,b,c"}]
+```
+
 ## POST /maps
 
 #### Authentication
@@ -45,6 +63,18 @@ Clients must supply the following data
     - `application/json;charset=utf-8`
     - `application/json`
 
+- Example (): `application/json;charset=utf-8`
+
+```javascript
+{"name":"Sample","id":1,"fields":"a,b,c"}
+```
+
+- Example (): `application/json`
+
+```javascript
+{"name":"Sample","id":1,"fields":"a,b,c"}
+```
+
 #### Response:
 
 - Status code 200
@@ -58,13 +88,13 @@ Clients must supply the following data
 - 
 
 ```javascript
-null
+{"name":"Sample","id":1,"fields":"a,b,c"}
 ```
 
 - 
 
 ```javascript
-null
+{"name":"Sample","id":1,"fields":"a,b,c"}
 ```
 
 ## GET /maps/:map_id
@@ -93,12 +123,12 @@ Clients must supply the following data
 - 
 
 ```javascript
-null
+{"name":"Sample","id":1,"fields":"a,b,c"}
 ```
 
 - 
 
 ```javascript
-null
+{"name":"Sample","id":1,"fields":"a,b,c"}
 ```
 

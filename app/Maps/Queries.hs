@@ -9,6 +9,9 @@ import Protolude hiding (Map)
 import qualified Maps.Table as Maps
 
 
+-- Standard
+
+
 all :: RelationalQuery x Map
 all = select Maps.table
 

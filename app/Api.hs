@@ -10,7 +10,7 @@ import qualified Maps.Handlers as Maps
 
 {-| The API.
 
-    !!! The order of the routes must match the order of the handlers
+    {!} The order of the routes must match the order of the handlers
         (see `server` below, you will get a compiler error if it doesn't match)
 -}
 type Api
@@ -23,10 +23,10 @@ type Api
     = "maps" :> Get '[JSON] [Map]
 
     -- GET /maps/:map_id
-    :<|> "maps" :> Capture "map_id" Int :> Get '[JSON] (Maybe Map)
+    :<|> "maps" :> Capture "map_id" Int :> Get '[JSON] Map
 
     -- POST /maps
-    :<|> "maps" :> ReqBody '[JSON] Map :> Post '[JSON] (Maybe Map)
+    :<|> "maps" :> ReqBody '[JSON] Map :> Post '[JSON] Map
 
 
 

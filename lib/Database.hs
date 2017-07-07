@@ -79,7 +79,7 @@ byId table theId = do
 
 
 rawQuery :: Text -> IO ()
-rawQuery theQuery = connect $ do
+rawQuery theQuery = perform $ do
     backend     <- seldaBackend
     _           <- liftIO (runStmt backend theQuery [])
 
@@ -123,14 +123,14 @@ config = do
 
 
 
--- Connections
+-- Performances (aka. connections)
 
 
-connect :: SeldaM a -> IO a
-connect operation = do
+perform :: SeldaM a -> IO a
+perform operation = do
     pgConfig <- liftIO config
     withPostgreSQL pgConfig operation
 
 
-connectAndLift :: SeldaM a -> Handler a
-connectAndLift operation = liftIO (connect operation)
+performAndLift :: SeldaM a -> Handler a
+performAndLift operation = liftIO (perform operation)

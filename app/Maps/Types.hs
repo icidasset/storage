@@ -3,6 +3,7 @@ module Maps.Types where
 import Data.Aeson (FromJSON, ToJSON)
 import Database
 import Database.Selda (RowID)
+import Database.Selda.Unsafe (unsafeRowId)
 import GHC.Generics
 import Protolude hiding (Map)
 import Servant.Docs
@@ -30,5 +31,14 @@ instance ToJSON Map
 -- Documentation
 
 
+sample :: Map
+sample =
+    Map
+        { id = unsafeRowId 1
+        , name = "Sample"
+        , fields = "a,b,c"
+        }
+
+
 instance ToSample Map where
-    toSamples _ = []
+    toSamples _ = singleSample sample

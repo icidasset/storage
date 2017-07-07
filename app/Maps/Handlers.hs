@@ -1,25 +1,34 @@
 module Maps.Handlers where
 
-import Database.Selda (fromRowId)
+import Database.Selda (SeldaM, fromRowId)
 import Flow
 import Maps.Types
 import Protolude hiding (Map)
 import Servant (Handler)
 
 import qualified Database
+import qualified Handlers
 import qualified Maps.Queries
-import qualified Maps.Table
+import qualified Maps.Table as Maps
 
 
 -- Create
 
 
-create :: Map -> Handler (Maybe Map)
-create map = Database.connectAndLift $ do
-    id <- Database.insert Maps.Table.table map
+create :: Map -> Handler Map
+create map =
+    map
+        |> createComputation
+        |> Database.perform
+        |> Handlers.showOrNotFound
+
+
+createComputation :: Map -> SeldaM (Maybe Map)
+createComputation map = do
+    rowId <- Database.insert Maps.table map
 
     -- Return map with id
-    Database.one (Maps.Queries.byId $ fromRowId id)
+    Database.one (Maps.Queries.byId $ fromRowId rowId)
 
 
 
@@ -30,16 +39,17 @@ index :: Handler [Map]
 index =
     Maps.Queries.all
         |> Database.all
-        |> Database.connectAndLift
+        |> Database.performAndLift
 
 
 
 -- Show
 
 
-show :: Int -> Handler (Maybe Map)
-show id =
-    id
+show :: Int -> Handler Map
+show mapId =
+    mapId
         |> Maps.Queries.byId
         |> Database.one
-        |> Database.connectAndLift
+        |> Database.perform
+        |> Handlers.showOrNotFound
