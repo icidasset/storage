@@ -12,6 +12,9 @@ Experimental API written in Haskell.
 ### How to use
 
 ```shell
+# create a .env file
+echo "PG_DATABASE=storage_experiment_dev" > .env
+
 # create db and run migrations
 make cli -- db:create
 make cli -- db:migrate

@@ -1,6 +1,7 @@
 module Database where
 
 import Data.Aeson (FromJSON, ToJSON, parseJSON, toJSON)
+import Data.Pool (Pool)
 import Database.Selda as Selda
 import Database.Selda.Backend
 import Database.Selda.Generic as Selda
@@ -8,9 +9,11 @@ import Database.Selda.PostgreSQL
 import Database.Selda.Unsafe
 import Flow
 import GHC.Generics hiding ((:*:))
+import Handlers (Handler)
 import Protolude hiding ((:*:))
-import Servant (Handler)
 import System.Envy as Envy
+
+import qualified Data.Pool as Pool (withResource)
 
 
 -- Types
@@ -78,8 +81,8 @@ byId table theId = do
 -- Raw Queries
 
 
-rawQuery :: Text -> IO ()
-rawQuery theQuery = perform $ do
+rawQuery :: Pool SeldaConnection -> Text -> IO ()
+rawQuery pool theQuery = perform pool $ do
     backend     <- seldaBackend
     _           <- liftIO (runStmt backend theQuery [])
 
@@ -123,14 +126,22 @@ config = do
 
 
 
--- Performances (aka. connections)
+-- Performances
 
 
-perform :: SeldaM a -> IO a
-perform operation = do
+{-| Assign 1 action to the pool and perform the database operation.
+-}
+perform :: Pool SeldaConnection -> SeldaM a -> IO a
+perform pool operation =
+    Pool.withResource pool (runSeldaT operation)
+
+
+performAndLift :: Pool SeldaConnection -> SeldaM a -> Handler a
+performAndLift pool operation =
+    liftIO (perform pool operation)
+
+
+performWithNewConnection :: SeldaM a -> IO a
+performWithNewConnection operation =  do
     pgConfig <- liftIO config
     withPostgreSQL pgConfig operation
-
-
-performAndLift :: SeldaM a -> Handler a
-performAndLift operation = liftIO (perform operation)

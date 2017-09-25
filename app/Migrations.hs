@@ -11,7 +11,7 @@ import qualified Maps.Table as Maps
 
 
 up :: IO ()
-up = perform $ do
+up = performWithNewConnection $ do
     tryCreateTable Maps.table
 
 
@@ -20,5 +20,5 @@ up = perform $ do
 
 
 down :: IO ()
-down = perform $ do
+down = performWithNewConnection $ do
     tryDropTable Maps.table

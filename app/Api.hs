@@ -5,6 +5,7 @@ import Protolude (Int, Maybe)
 import Servant
 import Servant.Docs
 
+import qualified Handlers
 import qualified Maps.Handlers as Maps
 
 
@@ -33,7 +34,7 @@ type Api
 -- Server
 
 
-server :: Server Api
+server :: ServerT Api Handlers.Handler
 server =
 
     --

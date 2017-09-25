@@ -23,6 +23,7 @@ dependencies:
   - flow
   - process == 1.4.*
   - protolude == 0.1.*
+  - resource-pool == 0.2.3.*
   - selda == 0.1.*
   - selda-postgresql == 0.1.*
   - servant-docs == 0.10.*

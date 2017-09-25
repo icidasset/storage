@@ -2,9 +2,9 @@ module Maps.Handlers where
 
 import Database.Selda (SeldaM, fromRowId)
 import Flow
+import Handlers (Handler, fetchState)
 import Maps.Types
 import Protolude hiding (Map)
-import Servant (Handler)
 
 import qualified Database
 import qualified Handlers
@@ -16,10 +16,12 @@ import qualified Maps.Table as Maps
 
 
 create :: Map -> Handler Map
-create map =
+create map = do
+    db <- fetchState Handlers.databasePool
+
     map
         |> createComputation
-        |> Database.perform
+        |> Database.perform db
         |> Handlers.showOrNotFound
 
 
@@ -36,10 +38,12 @@ createComputation map = do
 
 
 index :: Handler [Map]
-index =
+index = do
+    db <- fetchState Handlers.databasePool
+
     Maps.Queries.all
         |> Database.all
-        |> Database.performAndLift
+        |> Database.performAndLift db
 
 
 
@@ -47,9 +51,11 @@ index =
 
 
 show :: Int -> Handler Map
-show mapId =
+show mapId = do
+    db <- fetchState Handlers.databasePool
+
     mapId
         |> Maps.Queries.byId
         |> Database.one
-        |> Database.perform
+        |> Database.perform db
         |> Handlers.showOrNotFound
