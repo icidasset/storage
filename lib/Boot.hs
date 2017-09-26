@@ -39,7 +39,7 @@ main = do
     -- Initialize launch sequence
     Api.server
         |> enter (transform state)
-        |> serve proxy
+        |> serve (Proxy :: Proxy Api)
         |> defWaiMain
 
 
@@ -47,7 +47,9 @@ main = do
 -}
 initialState :: Env -> IO Handlers.State
 initialState env = do
+    --
     -- Database pool
+    --
     config          <- Database.config
     maybePoolSize   <- lookupEnv "PG_POOL_SIZE"
 
@@ -57,7 +59,9 @@ initialState env = do
 
     pool            <- createPool poolStart poolEnd poolSize 0.5 poolSize
 
+    --
     -- Result
+    --
     return State
         { databasePool = pool
         }
@@ -67,4 +71,4 @@ initialState env = do
 -}
 transform :: State -> Handlers.Handler :~> Servant.Handler
 transform =
-    runReaderTNat
+    Servant.runReaderTNat

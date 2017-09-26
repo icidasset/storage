@@ -1,9 +1,10 @@
 module Main where
 
+import Api (Api)
 import Protolude
+import Servant (Proxy)
 import Servant.Docs as Docs
 
-import qualified Api
 import qualified Data.Text as Text (pack)
 
 
@@ -23,4 +24,4 @@ main =
 
 
 api :: Docs.API
-api = docs Api.proxy
+api = docs (Proxy :: Proxy Api)

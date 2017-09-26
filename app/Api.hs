@@ -47,15 +47,6 @@ server =
 
 
 
--- Proxy
-
-
-proxy :: Proxy Api
-proxy =
-    Proxy
-
-
-
 -- Documentation
 
 
