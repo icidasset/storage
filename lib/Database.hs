@@ -102,8 +102,8 @@ instance Var (Maybe Text) where
 
 {-| PostgreSQL config & environment variables
 
-> PG_HOST
-> PG_PORT
+> PG_HOST (optional)
+> PG_PORT (optional)
 > PG_DATABASE
 > PG_USERNAME (optional)
 > PG_PASSWORD (optional)
@@ -136,11 +136,16 @@ perform pool operation =
     Pool.withResource pool (runSeldaT operation)
 
 
+{-| Same as `perform`, but lifts the IO operation in a Handler.
+-}
 performAndLift :: Pool SeldaConnection -> SeldaM a -> Handler a
 performAndLift pool operation =
     liftIO (perform pool operation)
 
 
+{-| Perform a database operation without using a pool.
+    Example use-case: database migrations
+-}
 performWithNewConnection :: SeldaM a -> IO a
 performWithNewConnection operation =  do
     pgConfig <- liftIO config
