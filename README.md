@@ -7,6 +7,7 @@ Experimental API written in Haskell.
 - Automatically generated API docs using `servant-docs`
 - Easy db querying using `selda`
 - Database migrations (partially using `selda`)
+- Ensure existance of .env variables using `dotenv`
 
 
 ### How to use

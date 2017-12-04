@@ -4,6 +4,7 @@ import Protolude
 import System.Environment (lookupEnv)
 
 import qualified Configuration.Dotenv as Dotenv
+import qualified Configuration.Dotenv.Types as Dotenv
 import qualified Data.Maybe as Maybe
 
 
@@ -37,4 +38,9 @@ appEnvironment = do
 
 loadDotEnvFile :: IO ()
 loadDotEnvFile =
-    Dotenv.loadFile False ".env"
+    Dotenv.loadFile
+        Dotenv.Config
+            { configExamplePath = [ ".env.example"]
+            , configOverride = False
+            , configPath = [ ".env" ]
+            }

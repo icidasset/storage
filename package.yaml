@@ -18,15 +18,15 @@ default-extensions:
 dependencies:
   - aeson == 1.*
   - base >= 4.9
-  - dotenv == 0.3.*
+  - dotenv == 0.5.*
   - envy == 1.3.*
   - flow
-  - process == 1.4.*
-  - protolude == 0.1.*
+  - process == 1.6.*
+  - protolude == 0.2.*
   - resource-pool == 0.2.3.*
   - selda == 0.1.*
   - selda-postgresql == 0.1.*
-  - servant-docs == 0.10.*
+  - servant-docs == 0.11.*
   - servant-server == 0.11.*
   - text == 1.2.*
   - wai-cli == 0.1.*
@@ -36,6 +36,16 @@ executables:
   # 🚜
   server:
     main: Boot.hs
+    other-modules: &mods
+      - Api
+      - Database
+      - Environment
+      - Handlers
+      - Maps.Handlers
+      - Maps.Queries
+      - Maps.Table
+      - Maps.Types
+      - Migrations
     source-dirs:
       - app
       - lib
@@ -43,6 +53,7 @@ executables:
   # 📖
   docs:
     main: Docs.hs
+    other-modules: *mods
     source-dirs:
       - app
       - lib
@@ -50,6 +61,7 @@ executables:
   # 🛠
   cli:
     main: Main.hs
+    other-modules: *mods
     source-dirs:
       - app
       - cli
