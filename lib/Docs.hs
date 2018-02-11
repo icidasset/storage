@@ -20,7 +20,7 @@ main =
 
 
 
--- Modules
+-- Documentation for the API
 
 
 api :: Docs.API

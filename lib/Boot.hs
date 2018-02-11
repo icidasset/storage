@@ -1,6 +1,7 @@
 module Main where
 
 import Api
+import Control.Monad.Trans.Reader (runReaderT)
 import Data.Pool
 import Environment
 import Flow
@@ -31,15 +32,18 @@ main = do
 
     case env of
         Development -> loadDotEnvFile
-        _           -> return ()
+        _           -> return []
 
     -- Initial state
     state   <- initialState env
 
+    -- Api
+    let api = Proxy :: Proxy Api
+
     -- Initialize launch sequence
     Api.server
-        |> enter (transform state)
-        |> serve (Proxy :: Proxy Api)
+        |> Servant.hoistServer api (transform state)
+        |> Servant.serve api
         |> defWaiMain
 
 
@@ -69,6 +73,6 @@ initialState env = do
 
 {-| Transforms our custom `Handler` into a normal Servant `Handler`.
 -}
-transform :: State -> Handlers.Handler :~> Servant.Handler
+transform :: State -> Handlers.Handler a -> Servant.Handler a
 transform =
-    Servant.runReaderTNat
+    flip runReaderT

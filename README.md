@@ -1,4 +1,4 @@
-Experimental API written in Haskell.
+A REST API written in Haskell.
 
 
 ### Features
@@ -31,7 +31,6 @@ make server
 ### Issues
 
 - Database migrations are not incremental
-- Some small issues with documentation generation (ie. double rendering of the examples)
 
 
 ### To do

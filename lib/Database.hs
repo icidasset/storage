@@ -93,13 +93,6 @@ rawQuery pool theQuery = perform pool $ do
 -- Config
 
 
-{-| Extend Envy.
--}
-instance Var (Maybe Text) where
-    toVar = show
-    fromVar = readMaybe
-
-
 {-| PostgreSQL config & environment variables
 
 > PG_HOST (optional)

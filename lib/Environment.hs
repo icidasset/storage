@@ -36,7 +36,10 @@ appEnvironment = do
 -- Utils
 
 
-loadDotEnvFile :: IO ()
+type String = [Char]
+
+
+loadDotEnvFile :: IO [(String, String)]
 loadDotEnvFile =
     Dotenv.loadFile
         Dotenv.Config

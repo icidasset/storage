@@ -1,13 +1,6 @@
 ## GET /maps
 
-#### Authentication
-
-
-
-Clients must supply the following data
-
-
-#### Response:
+### Response:
 
 - Status code 200
 - Headers: []
@@ -17,65 +10,40 @@ Clients must supply the following data
     - `application/json;charset=utf-8`
     - `application/json`
 
-- 
+- Example (`application/json;charset=utf-8`, `application/json`):
 
-```javascript
+    ```javascript
 []
-```
+    ```
 
-- 
+- Example (`application/json;charset=utf-8`, `application/json`):
 
-```javascript
-[]
-```
-
-- 
-
-```javascript
+    ```javascript
 [{"name":"Sample","id":1,"fields":"a,b,c"}]
-```
+    ```
 
-- 
+- Example (`application/json;charset=utf-8`):
 
-```javascript
-[{"name":"Sample","id":1,"fields":"a,b,c"}]
-```
-
-- 
-
-```javascript
+    ```javascript
 [{"name":"Sample","id":1,"fields":"a,b,c"},{"name":"Sample","id":1,"fields":"a,b,c"}]
-```
+    ```
 
 ## POST /maps
 
-#### Authentication
-
-
-
-Clients must supply the following data
-
-
-#### Request:
+### Request:
 
 - Supported content types are:
 
     - `application/json;charset=utf-8`
     - `application/json`
 
-- Example (): `application/json;charset=utf-8`
+- Example (`application/json;charset=utf-8`, `application/json`):
 
-```javascript
+    ```javascript
 {"name":"Sample","id":1,"fields":"a,b,c"}
-```
+    ```
 
-- Example (): `application/json`
-
-```javascript
-{"name":"Sample","id":1,"fields":"a,b,c"}
-```
-
-#### Response:
+### Response:
 
 - Status code 200
 - Headers: []
@@ -85,32 +53,19 @@ Clients must supply the following data
     - `application/json;charset=utf-8`
     - `application/json`
 
-- 
+- Example (`application/json;charset=utf-8`, `application/json`):
 
-```javascript
+    ```javascript
 {"name":"Sample","id":1,"fields":"a,b,c"}
-```
-
-- 
-
-```javascript
-{"name":"Sample","id":1,"fields":"a,b,c"}
-```
+    ```
 
 ## GET /maps/:map_id
 
-#### Authentication
-
-
-
-Clients must supply the following data
-
-
-#### Captures:
+### Captures:
 
 - *map_id*: The `id` of the Map
 
-#### Response:
+### Response:
 
 - Status code 200
 - Headers: []
@@ -120,15 +75,9 @@ Clients must supply the following data
     - `application/json;charset=utf-8`
     - `application/json`
 
-- 
+- Example (`application/json;charset=utf-8`, `application/json`):
 
-```javascript
+    ```javascript
 {"name":"Sample","id":1,"fields":"a,b,c"}
-```
-
-- 
-
-```javascript
-{"name":"Sample","id":1,"fields":"a,b,c"}
-```
+    ```
 
