@@ -1,11 +1,12 @@
 module Main where
 
 import Api (Api)
+import Flow
 import Protolude
 import Servant (Proxy)
 import Servant.Docs as Docs
 
-import qualified Data.Text as Text (pack)
+import qualified Data.Text as Text (pack, replace)
 
 
 {-| Generate documentation.
@@ -16,7 +17,11 @@ import qualified Data.Text as Text (pack)
 -}
 main :: IO ()
 main =
-    writeFile "docs/API.md" (Text.pack $ Docs.markdown api)
+    api
+        |> Docs.markdown
+        |> Text.pack
+        |> Text.replace "    ```" "```"
+        |> writeFile "docs/API.md"
 
 
 

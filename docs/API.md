@@ -12,21 +12,21 @@
 
 - Example (`application/json;charset=utf-8`, `application/json`):
 
-    ```javascript
+```javascript
 []
-    ```
+```
 
 - Example (`application/json;charset=utf-8`, `application/json`):
 
-    ```javascript
+```javascript
 [{"name":"Sample","id":1,"fields":"a,b,c"}]
-    ```
+```
 
 - Example (`application/json;charset=utf-8`):
 
-    ```javascript
+```javascript
 [{"name":"Sample","id":1,"fields":"a,b,c"},{"name":"Sample","id":1,"fields":"a,b,c"}]
-    ```
+```
 
 ## POST /maps
 
@@ -39,9 +39,9 @@
 
 - Example (`application/json;charset=utf-8`, `application/json`):
 
-    ```javascript
+```javascript
 {"name":"Sample","id":1,"fields":"a,b,c"}
-    ```
+```
 
 ### Response:
 
@@ -55,9 +55,9 @@
 
 - Example (`application/json;charset=utf-8`, `application/json`):
 
-    ```javascript
+```javascript
 {"name":"Sample","id":1,"fields":"a,b,c"}
-    ```
+```
 
 ## GET /maps/:map_id
 
@@ -77,7 +77,7 @@
 
 - Example (`application/json;charset=utf-8`, `application/json`):
 
-    ```javascript
+```javascript
 {"name":"Sample","id":1,"fields":"a,b,c"}
-    ```
+```
 
